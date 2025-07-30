@@ -15,7 +15,7 @@ const Bounded = React.forwardRef<HTMLDivElement, BoundedPops>(
         className={cn("px-4 py-10 md:px-8 md:py-12 lg:px-12", classname)}
         {...restProps}
       >
-        <div className="mx-auto w-full">{children}</div>
+        <div className="mx-auto max-w-7xl">{children}</div>
       </Comp>
     );
   }

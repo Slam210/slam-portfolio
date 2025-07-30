@@ -73,12 +73,6 @@ function Geometries() {
     { geometry: new THREE.ConeGeometry(1, 2, 32), r: 0.5 }, // Cone
   ];
 
-  const soundEffects = [
-    new Audio("/sounds/hit2.ogg"),
-    new Audio("/sounds/hit3.ogg"),
-    new Audio("/sounds/hit4.ogg"),
-  ];
-
   const materials = [
     new THREE.MeshStandardMaterial({
       color: 0x2ecc71,
@@ -266,14 +260,13 @@ function Geometries() {
       key={JSON.stringify(position)}
       position={position.map((p) => p * 2)}
       geometry={geometry}
-      soundEffects={soundEffects}
       materials={materials}
       r={r}
     />
   ));
 }
 
-function Geometry({ r, position, geometry, soundEffects, materials }) {
+function Geometry({ r, position, geometry, materials }) {
   const meshRef = useRef();
   const [visible, setVisible] = useState(false);
 
@@ -282,8 +275,13 @@ function Geometry({ r, position, geometry, soundEffects, materials }) {
   function handleClick(e) {
     const mesh = e.object;
 
-    gsap.utils.random(soundEffects).play();
+    const sounds = ["/sounds/hit2.ogg", "/sounds/hit3.ogg", "/sounds/hit4.ogg"];
+    const audio = new Audio(gsap.utils.random(sounds));
+    audio.play().catch((err) => {
+      console.warn("Audio playback failed", err);
+    });
 
+    // Animate
     gsap.to(mesh.rotation, {
       x: `+=${gsap.utils.random(0, 2)}`,
       y: `+=${gsap.utils.random(0, 2)}`,
