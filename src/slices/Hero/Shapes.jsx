@@ -68,9 +68,6 @@ function Geometries() {
     { geometry: new THREE.OctahedronGeometry(1.5), r: 0.7 }, // Diamond
     { geometry: new THREE.TorusKnotGeometry(0.7, 0.2, 100, 16), r: 0.6 }, // Torus Knot
     { geometry: new THREE.BoxGeometry(1.5, 1.5, 1.5), r: 0.5 }, // Cube
-    { geometry: new THREE.SphereGeometry(1.3, 32, 32), r: 0.5 }, // Sphere
-    { geometry: new THREE.CylinderGeometry(0.8, 0.8, 2, 32), r: 0.5 }, // Cylinder
-    { geometry: new THREE.ConeGeometry(1, 2, 32), r: 0.5 }, // Cone
   ];
 
   const materials = [
@@ -275,7 +272,7 @@ function Geometry({ r, position, geometry, materials }) {
   function handleClick(e) {
     const mesh = e.object;
 
-    const sounds = ["/sounds/hit2.ogg", "/sounds/hit3.ogg", "/sounds/hit4.ogg"];
+    const sounds = ["/sounds/hit2.mp3", "/sounds/hit3.mp3", "/sounds/hit4.mp3"];
     const audio = new Audio(gsap.utils.random(sounds));
     audio.play().catch((err) => {
       console.warn("Audio playback failed", err);
