@@ -14,14 +14,23 @@ const urbanist = Urbanist({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const client = createClient();
-  const settings = await client.getSingle("settings");
+  try {
+    const client = createClient();
+    const settings = await client.getSingle("settings");
 
-  return {
-    title: settings.data.meta_title,
-    description: settings.data.meta_description,
-  };
+    return {
+      title: settings.data.meta_title || "Default Title",
+      description: settings.data.meta_description || "Default Description",
+    };
+  } catch (error) {
+    console.error("Failed to fetch metadata:", error);
+    return {
+      title: "Default Title",
+      description: "Default Description",
+    };
+  }
 }
+
 export default function RootLayout({
   children,
 }: Readonly<{
