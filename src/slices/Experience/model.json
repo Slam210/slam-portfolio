@@ -52,7 +52,7 @@
                   "label": "Description",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "strong"
+                  "multi": "strong,list-item"
                 }
               }
             }

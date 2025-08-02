@@ -28,13 +28,17 @@ const Experience = ({ slice }: ExperienceProps): JSX.Element => {
             className="ml-6 mt-6 max-w-3xl md:ml-12 border-l-2 border-slate-700 pl-4"
           >
             {/* Institution */}
-            <Heading as="h3" size="md" className="text-slate-100">
-              {event.institution}
+            <Heading
+              as="h3"
+              size="md"
+              className="text-slate-100 italic font-bold"
+            >
+              {event.title}
             </Heading>
 
             {/* Title and Time Period */}
             <div className="mt-1 flex flex-col gap-1 text-slate-400">
-              <span className="text-lg font-medium">{event.title}</span>
+              <span className="text-lg font-bold">{event.institution}</span>
               <span className="text-sm font-normal italic">
                 {event.time_period}
               </span>

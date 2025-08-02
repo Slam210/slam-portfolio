@@ -112,7 +112,13 @@ export default function ContentList({
     setCurrentItem(null);
   };
 
-  const contentImages = items.map((item) => {
+  const sortedItems = items.slice().sort((a, b) => {
+    const dateA = new Date(a.data.date ?? "");
+    const dateB = new Date(b.data.date ?? "");
+    return dateB.getTime() - dateA.getTime(); // Newest first
+  });
+
+  const contentImages = sortedItems.map((item) => {
     const image = isFilled.image(item.data.hover_image)
       ? item.data.hover_image
       : fallbackItemImage;
@@ -140,7 +146,7 @@ export default function ContentList({
         className="grid border-b border-b-slate-100"
         onMouseLeave={onMouseLeave}
       >
-        {items.map((post, index) => (
+        {sortedItems.map((post, index) => (
           <li
             key={index}
             ref={(el) => {
@@ -156,15 +162,26 @@ export default function ContentList({
             >
               <div className="flex flex-col">
                 <span className="text-3xl font-bold">{post.data.title}</span>
-                <div className="flex gap-3 text-yellow-400">
-                  {post.tags
-                    .slice()
-                    .sort((a, b) => a.localeCompare(b))
-                    .map((tag, index) => (
-                      <span key={index} className="text-lg font-bold">
-                        {tag}
-                      </span>
-                    ))}
+                <div className="flex flex-col gap-1">
+                  <div className="flex flex-wrap gap-3 text-yellow-400">
+                    {post.tags
+                      .slice()
+                      .sort((a, b) => a.localeCompare(b))
+                      .map((tag, index) => (
+                        <span key={index} className="text-lg font-bold">
+                          {tag}
+                        </span>
+                      ))}
+                  </div>
+                  {post.data.date && (
+                    <span className="text-sm text-slate-400">
+                      {new Date(post.data.date).toLocaleDateString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                  )}
                 </div>
               </div>
               <span className="ml-auto flex items-center gap-2 text-xl font-medium md:ml-0">

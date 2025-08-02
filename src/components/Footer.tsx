@@ -25,8 +25,15 @@ export default async function Footer() {
             >
               /
             </span>
-            <p className=" text-sm text-slate-300 ">
-              © {new Date().getFullYear()} {settings.data.name}
+            <p className="text-sm text-slate-300">
+              <a
+                href={process.env.REPO_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                © {new Date().getFullYear()} {settings.data.name}
+              </a>
             </p>
           </div>
 

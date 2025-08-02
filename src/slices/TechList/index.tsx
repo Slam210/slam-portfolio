@@ -64,37 +64,43 @@ const TechList = ({ slice }: TechListProps): JSX.Element => {
       ref={component}
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="px-4 py-10 md:px-6 md:py-14 lg:py-16">
+        <div className="">
           <Heading size="lg" as="h2">
             {slice.primary.heading}
           </Heading>
         </div>
 
-        {slice.primary.tech.map(({ tech_color, tech_name }, index) => (
-          <div
-            key={index}
-            className="tech-row mb-8 flex items-center justify-center gap-4 text-slate-700"
-            aria-label={tech_name || ""}
-          >
-            {Array.from({ length: 15 }, (_, index) => (
-              <React.Fragment key={index}>
-                <span
-                  className={
-                    "tech-item text-8xl font-extrabold uppercase tracking-tighter"
-                  }
-                  style={{
-                    color: index === 7 && tech_color ? tech_color : "inherit",
-                  }}
-                >
-                  {tech_name}
-                </span>
-                <span className="text-3xl">
-                  <MdCircle />
-                </span>
-              </React.Fragment>
-            ))}
-          </div>
-        ))}
+        {slice.primary.tech
+          .sort((a, b) => {
+            const nameA = a.tech_name ?? "";
+            const nameB = b.tech_name ?? "";
+            return nameA.localeCompare(nameB);
+          })
+          .map(({ tech_color, tech_name }, index) => (
+            <div
+              key={index}
+              className="tech-row mb-8 flex items-center justify-center gap-4 text-slate-700"
+              aria-label={tech_name || ""}
+            >
+              {Array.from({ length: 15 }, (_, index) => (
+                <React.Fragment key={index}>
+                  <span
+                    className={
+                      "tech-item text-8xl font-extrabold uppercase tracking-tighter"
+                    }
+                    style={{
+                      color: index === 7 && tech_color ? tech_color : "inherit",
+                    }}
+                  >
+                    {tech_name}
+                  </span>
+                  <span className="text-3xl">
+                    <MdCircle />
+                  </span>
+                </React.Fragment>
+              ))}
+            </div>
+          ))}
       </div>
     </section>
   );
