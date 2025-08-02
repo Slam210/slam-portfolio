@@ -15,7 +15,7 @@ This site not only highlights my work but also serves as an example of what’s 
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router)  
+- **Framework:** Next.js 
 - **Language:** TypeScript  
 - **3D Graphics:** Three.js  
 - **Animations:** GSAP + ScrollTrigger  
